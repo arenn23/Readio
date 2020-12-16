@@ -30,5 +30,8 @@ else fileLoc = path.join(__dirname + "/client/public/index.html");
 
 app.use("/users", require("./routes/userRouter"));
 app.use("/posts", require("./routes/postRouter"));
+app.get("*", (req, res) => {
+  res.sendFile(fileLoc);
+});
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
