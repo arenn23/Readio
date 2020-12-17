@@ -27,8 +27,8 @@ function Register() {
     try {
       const newUser = { userName, password };
       console.log(newUser);
-      await Axios.post("http://localhost:5000/users/register", newUser);
-      const loginRes = await Axios.post("http://localhost:5000/users/login", {
+      await Axios.post("/users/register", newUser);
+      const loginRes = await Axios.post("/users/login", {
         userName,
         password,
       });

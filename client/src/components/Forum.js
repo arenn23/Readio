@@ -23,7 +23,7 @@ const Forum = (props) => {
   let { id } = useParams();
 
   useEffect(async () => {
-    fetch(`http://localhost:5000/posts/${id}`, {
+    fetch(`/posts/${id}`, {
       method: "GET",
     })
       .then((res) => res.json())
@@ -34,7 +34,7 @@ const Forum = (props) => {
           setGetPost(res);
         }
       });
-    fetch(`http://localhost:5000/posts/${id}/comments`, {
+    fetch(`/posts/${id}/comments`, {
       method: "GET",
     })
       .then((res) => res.json())

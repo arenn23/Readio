@@ -30,7 +30,7 @@ const NewForum = (props) => {
       if (post.title && post.text) {
         post.author = userData.user.userName;
         post.username = userData.user.userName;
-        fetch("http://localhost:5000/posts/new", {
+        fetch("/posts/new", {
           method: "POST",
           headers: {
             "x-auth-token": localStorage.getItem("auth-token"),
