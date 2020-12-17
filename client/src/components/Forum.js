@@ -59,7 +59,7 @@ const Forum = (props) => {
     if (!(userData.user === undefined)) {
       if (post.text) {
         post.username = userData.user.userName;
-        fetch(`http://localhost:5000/posts/${id}/comments`, {
+        fetch(`/posts/${id}/comments`, {
           method: "POST",
           headers: {
             "x-auth-token": localStorage.getItem("auth-token"),
