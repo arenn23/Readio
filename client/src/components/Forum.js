@@ -43,7 +43,6 @@ const Forum = (props) => {
       .then((res) => {
         if (res.success) {
           console.log("posted successfully");
-          setComments(res);
         }
       });
   }, [comment]);
