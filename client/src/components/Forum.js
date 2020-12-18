@@ -14,6 +14,7 @@ import {
 import { useParams } from "react-router-dom";
 import Header from "./Header";
 import UserContext from "../context/userContext";
+import { set } from "mongoose";
 
 const Forum = (props) => {
   const [comment, setComment] = useState();
@@ -49,6 +50,7 @@ const Forum = (props) => {
 
   const submitPost = (event) => {
     event.preventDefault();
+    setComments("updated");
     let post = {};
     post.text = event.target.textBody.value;
     post.post = id;
