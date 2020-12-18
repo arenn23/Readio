@@ -45,7 +45,7 @@ const Forum = (props) => {
           setComments(res);
         }
       });
-  });
+  }, []);
 
   const submitPost = (event) => {
     event.preventDefault();
