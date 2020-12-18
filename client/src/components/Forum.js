@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { withRouter } from "react-router";
+import { withRouter, useHistory } from "react-router";
 import { GoComment } from "react-icons/go";
 import {
   Container,
@@ -18,6 +18,7 @@ import UserContext from "../context/userContext";
 const Forum = (props) => {
   const { userData } = useContext(UserContext);
   const [err, setErr] = useState();
+  const history = useHistory();
   let [getPost, setGetPost] = useState({});
   let [getComments, setComments] = useState({});
   let { id } = useParams();
@@ -54,11 +55,9 @@ const Forum = (props) => {
     post.created = Date.now();
     if (post.text === "") {
       setErr("Please enter a comment");
-      event.preventDefault();
     }
     if (localStorage.getItem("user") === null) {
       setErr("Must be logged in");
-      event.preventDefault();
     }
     if (!(localStorage.getItem("user") === null)) {
       if (post.text) {
@@ -75,9 +74,8 @@ const Forum = (props) => {
           .then((res) => {
             if (res.success) {
               console.log("posted successfully");
-              event.preventDefault();
+              history.go(0);
             } else {
-              event.preventDefault();
               setErr(
                 "You are not authorized to post. Please provide a legitimate login"
               );
