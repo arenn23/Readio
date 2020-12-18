@@ -23,7 +23,7 @@ const Forum = (props) => {
   let { id } = useParams();
 
   useEffect(async () => {
-    fetch(`/posts/${id}`, {
+    fetch(`http://localhost:5000/posts/${id}`, {
       method: "GET",
     })
       .then((res) => res.json())
@@ -34,7 +34,7 @@ const Forum = (props) => {
           setGetPost(res);
         }
       });
-    fetch(`/posts/${id}/comments`, {
+    fetch(`http://localhost:5000/posts/${id}/comments`, {
       method: "GET",
     })
       .then((res) => res.json())
@@ -51,15 +51,18 @@ const Forum = (props) => {
     post.text = event.target.textBody.value;
     post.post = id;
     post.created = Date.now();
-    console.log(post);
-    if (userData.user === undefined) {
+    if (post.text === "") {
+      setErr("Please enter a comment");
+      event.preventDefault();
+    }
+    if (localStorage.getItem("user") === null) {
       setErr("Must be logged in");
       event.preventDefault();
     }
-    if (!(userData.user === undefined)) {
+    if (!(localStorage.getItem("user") === null)) {
       if (post.text) {
-        post.username = userData.user.userName;
-        fetch(`/posts/${id}/comments`, {
+        post.username = localStorage.getItem("user");
+        fetch(`http://localhost:5000/posts/${id}/comments`, {
           method: "POST",
           headers: {
             "x-auth-token": localStorage.getItem("auth-token"),
@@ -71,6 +74,12 @@ const Forum = (props) => {
           .then((res) => {
             if (res.success) {
               console.log("posted successfully");
+              event.preventDefault();
+            } else {
+              event.preventDefault();
+              setErr(
+                "You are not authorized to post. Please provide a legitimate login"
+              );
             }
           });
       }

@@ -14,7 +14,6 @@ import {
 import UserContext from "../context/userContext";
 
 const NewForum = (props) => {
-  const { userData } = useContext(UserContext);
   const [err, setErr] = useState();
 
   const submitPost = (event) => {
@@ -23,14 +22,14 @@ const NewForum = (props) => {
     post.title = event.target.title.value;
     post.text = event.target.textBody.value;
     post.created = Date.now();
-    if (userData.user === undefined) {
+    if (localStorage.getItem("user") === null) {
       setErr("Must be logged in");
     }
-    if (!(userData.user === undefined)) {
+    if (!(localStorage.getItem("user") === null)) {
       if (post.title && post.text) {
-        post.author = userData.user.userName;
-        post.username = userData.user.userName;
-        fetch("/posts/new", {
+        post.author = localStorage.getItem("user");
+        post.username = localStorage.getItem("user");
+        fetch("http://localhost:5000/posts/new", {
           method: "POST",
           headers: {
             "x-auth-token": localStorage.getItem("auth-token"),
@@ -43,8 +42,12 @@ const NewForum = (props) => {
             if (res.success) {
               console.log("posted successfully");
               console.log(res);
-              setErr("");
               props.history.push(`/forum/${res.body._id}`);
+            } else {
+              setErr(
+                "You are not authorized to post. Please provide a legitimate login"
+              );
+              event.preventDefault();
             }
           });
       } else {

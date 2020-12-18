@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Container, Row, Col, ButtonToggle } from "reactstrap";
 import { Link } from "react-router-dom";
 import UserContext from "../context/userContext";
@@ -10,8 +10,12 @@ const Header = () => {
       token: undefined,
       user: undefined,
     });
-    localStorage.setItem("auth-token", "");
+    localStorage.clear();
   };
+
+  useEffect(() => {
+    console.log(localStorage.getItem("user"));
+  });
 
   return (
     <Container fluid={true}>
@@ -22,7 +26,7 @@ const Header = () => {
           </Link>
         </Col>
         <Col>
-          {userData.user === undefined ? (
+          {localStorage.getItem("user") === null ? (
             <div>
               <Link to="/login">
                 <ButtonToggle style={{ marginTop: "10px" }} color="secondary">
@@ -44,7 +48,7 @@ const Header = () => {
                   verticalAlign: "middle",
                 }}
               >
-                Hello, {userData.user.userName}
+                Hello, {localStorage.getItem("user")}
               </h5>
               <ButtonToggle
                 onClick={logout}

@@ -13,7 +13,7 @@ app.use(BodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-var mongoDB = process.env.MONGODB_URI;
+var mongoDB = "mongodb://localhost:27017/readio";
 mongoose
   .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB connection successful"));

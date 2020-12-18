@@ -25,7 +25,7 @@ const Login = () => {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      const loginRes = await Axios.post("/users/login", {
+      const loginRes = await Axios.post("http://localhost:5000/users/login", {
         userName,
         password,
       });
@@ -34,6 +34,7 @@ const Login = () => {
         user: loginRes.data.user,
       });
       localStorage.setItem("auth-token", loginRes.data.token);
+      localStorage.setItem("user", loginRes.data.user.userName);
       history.push("/");
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
