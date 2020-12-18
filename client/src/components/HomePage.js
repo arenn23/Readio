@@ -10,7 +10,7 @@ const HomePage = (props) => {
   const [forum, setForum] = useState();
 
   useEffect(async () => {
-    fetch(`http://localhost:5000/posts/`, {
+    fetch(`/posts/`, {
       method: "GET",
     })
       .then((res) => res.json())
