@@ -16,7 +16,7 @@ import Header from "./Header";
 import UserContext from "../context/userContext";
 
 const Forum = (props) => {
-  const { userData } = useContext(UserContext);
+  const [comment, setComment] = useState();
   const [err, setErr] = useState();
   const history = useHistory();
   let [getPost, setGetPost] = useState({});
@@ -74,7 +74,7 @@ const Forum = (props) => {
           .then((res) => {
             if (res.success) {
               console.log("posted successfully");
-              history.go(0);
+              setComment("success");
             } else {
               setErr(
                 "You are not authorized to post. Please provide a legitimate login"
