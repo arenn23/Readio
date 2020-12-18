@@ -45,7 +45,7 @@ const Forum = (props) => {
           setComments(res);
         }
       });
-  }, []);
+  }, [comment]);
 
   const submitPost = (event) => {
     event.preventDefault();
@@ -75,7 +75,6 @@ const Forum = (props) => {
             if (res.success) {
               console.log("posted successfully");
               setErr("Posted Successfully - see bottom of page");
-              event.target.body.value = "";
             } else {
               setErr(
                 "You are not authorized to post. Please provide a legitimate login"
