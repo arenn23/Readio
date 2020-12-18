@@ -47,6 +47,7 @@ const Forum = (props) => {
   }, []);
 
   const submitPost = (event) => {
+    event.preventDefault();
     let post = {};
     post.text = event.target.textBody.value;
     post.post = id;
