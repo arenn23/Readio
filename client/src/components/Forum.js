@@ -19,6 +19,7 @@ import { set } from "mongoose";
 const Forum = (props) => {
   const [comment, setComment] = useState();
   const [err, setErr] = useState();
+  const [update, setUpdate] = useState();
   const history = useHistory();
   let [getPost, setGetPost] = useState({});
   let [getComments, setComments] = useState({});
@@ -43,13 +44,14 @@ const Forum = (props) => {
       .then((res) => {
         if (res.success) {
           console.log("posted successfully");
+          setComments(res);
         }
       });
-  }, [comment]);
+  }, [update]);
 
   const submitPost = (event) => {
     event.preventDefault();
-    setComments("updated");
+    setUpdate("updated");
     let post = {};
     post.text = event.target.textBody.value;
     post.post = id;
