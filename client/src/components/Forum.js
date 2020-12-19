@@ -45,6 +45,7 @@ const Forum = (props) => {
         if (res.success) {
           console.log("posted successfully");
           setComments(res);
+          console.log("hello");
         }
       });
   }, [update]);
