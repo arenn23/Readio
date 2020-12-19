@@ -44,7 +44,7 @@ const Forum = (props) => {
           setGetPost(res);
           setTimeout(() => {
             setErr("");
-          }, 2000);
+          }, 5000);
         }
       });
   }, [count]);
