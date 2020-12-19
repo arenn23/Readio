@@ -17,35 +17,31 @@ import UserContext from "../context/userContext";
 import { set } from "mongoose";
 
 const Forum = (props) => {
-  const [comment, setComment] = useState();
-  const [err, setErr] = useState();
-  const [update, setUpdate] = useState();
-  const history = useHistory();
+  let [err, setErr] = useState();
+  let [update, setUpdate] = useState();
   let [getPost, setGetPost] = useState({});
   let [getComments, setComments] = useState({});
   let { id } = useParams();
 
   useEffect(async () => {
-    fetch(`/posts/${id}`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.success) {
-          console.log("posted successfully");
-          console.log(res);
-          setGetPost(res);
-        }
-      });
     fetch(`/posts/${id}/comments`, {
       method: "GET",
     })
       .then((res) => res.json())
       .then((res) => {
         if (res.success) {
-          console.log("posted successfully");
           setComments(res);
           console.log("hello");
+        }
+      });
+    fetch(`/posts/${id}`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.success) {
+          console.log(res);
+          setGetPost(res);
         }
       });
   }, [update]);
@@ -77,7 +73,6 @@ const Forum = (props) => {
           .then((res) => res.json())
           .then((res) => {
             if (res.success) {
-              console.log("posted successfully");
               setErr("Posted Successfully - see bottom of page");
             } else {
               setErr(
