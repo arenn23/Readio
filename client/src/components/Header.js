@@ -13,10 +13,6 @@ const Header = () => {
     localStorage.clear();
   };
 
-  useEffect(() => {
-    console.log(localStorage.getItem("user"));
-  });
-
   return (
     <Container fluid={true}>
       <Row style={{ textAlign: "center", backgroundColor: "#00FFFF" }}>
