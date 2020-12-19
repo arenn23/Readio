@@ -17,6 +17,7 @@ import UserContext from "../context/userContext";
 import { set } from "mongoose";
 
 const Forum = (props) => {
+  var counter = 0;
   let [err, setErr] = useState();
   let [update, setUpdate] = useState();
   let [getPost, setGetPost] = useState({});
@@ -42,13 +43,15 @@ const Forum = (props) => {
         if (res.success) {
           console.log(res);
           setGetPost(res);
+          setErr("");
         }
       });
   }, [update]);
 
   const submitPost = (event) => {
+    counter = counter + 1;
     event.preventDefault();
-    setUpdate("updated");
+    setUpdate(counter);
     let post = {};
     post.text = event.target.textBody.value;
     post.post = id;
