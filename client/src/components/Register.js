@@ -37,6 +37,7 @@ function Register() {
         user: loginRes.data.user,
       });
       localStorage.setItem("auth-token", loginRes.data.token);
+      localStorage.setItem("user", loginRes.data.user.userName);
       history.push("/");
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
