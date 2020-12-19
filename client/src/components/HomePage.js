@@ -62,7 +62,7 @@ const HomePage = (props) => {
             </div>
           </Col>
           <Col xs="auto">
-            {localStorage.getItem("user"); === null ? (
+            {localStorage.getItem("user") === null ? (
               <div></div>
             ) : (
               <div style={{ textAlign: "center" }}>
