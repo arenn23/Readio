@@ -42,7 +42,9 @@ const Forum = (props) => {
         if (res.success) {
           console.log(res);
           setGetPost(res);
-          setErr("");
+          setTimeout(() => {
+            setErr("");
+          }, 2000);
         }
       });
   }, [count]);
