@@ -59,7 +59,10 @@ const Forum = (props) => {
       setErr("Please enter a comment");
     }
     if (localStorage.getItem("user") === null) {
-      setErr("Must be logged in");
+      // setErr("Must be logged in");
+      setTimeout(() => {
+        setErr("Must be logged in");
+      }, 5000);
     }
     if (!(localStorage.getItem("user") === null)) {
       if (post.text) {
