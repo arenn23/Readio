@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-
+//auth function that takes req header and checks is JWT token is valid using jwt.verify
 const auth = (req, res, next) => {
   try {
     const token = req.header("x-auth-token");

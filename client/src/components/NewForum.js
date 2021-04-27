@@ -19,12 +19,15 @@ const NewForum = (props) => {
   const submitPost = (event) => {
     event.preventDefault();
     let post = {};
+    //Gets data from from
     post.title = event.target.title.value;
     post.text = event.target.textBody.value;
     post.created = Date.now();
+    //checks to see if user logged in
     if (localStorage.getItem("user") === null) {
       setErr("Must be logged in");
     }
+    //If all is good, sends post request to "posts/new endpoint"
     if (!(localStorage.getItem("user") === null)) {
       if (post.title && post.text) {
         post.author = localStorage.getItem("user");
@@ -39,13 +42,17 @@ const NewForum = (props) => {
         })
           .then((res) => res.json())
           .then((res) => {
+            //if posted successfully, navigates to forum`s page
             if (res.success) {
               console.log("posted successfully");
               console.log(res);
               props.history.push(`/forum/${res.body._id}`);
             } else {
+              //the following is rare error someone would recieve if they typed in a username directly to local storage.
+              //However, they would not have a valid authorization token. This is checked on the back end. Only someone with malicious intent
+              //would receive this error.
               setErr(
-                "You are not authorized to post. Please provide a legitimate login"
+                "You are not authorized to post. Please provide a legitimate login. We are watching..."
               );
               event.preventDefault();
             }

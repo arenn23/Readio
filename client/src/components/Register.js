@@ -23,6 +23,8 @@ function Register() {
   const history = useHistory();
 
   const submit = async (e) => {
+    //Posts username and login users/register. right after, posts login with same credentials.  If post, successful, sets userContext with token and user and updates localStorage.
+
     e.preventDefault();
     try {
       const newUser = { userName, password };
@@ -39,6 +41,7 @@ function Register() {
       localStorage.setItem("auth-token", loginRes.data.token);
       localStorage.setItem("user", loginRes.data.user.userName);
       history.push("/");
+      //If not, displays err
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
     }

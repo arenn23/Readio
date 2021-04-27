@@ -23,6 +23,7 @@ const Forum = (props) => {
   let [getComments, setComments] = useState({});
   let { id } = useParams();
 
+  //UseEffect is fired everytime count is updated. This fetchs the forum and its comments in two separate fetch requests.
   useEffect(async () => {
     fetch(`/posts/${id}/comments`, {
       method: "GET",
@@ -50,18 +51,21 @@ const Forum = (props) => {
   }, [count]);
 
   const submitPost = (event) => {
+    //Count is updated to refetch data
     event.preventDefault();
     setCount(count + 1);
     let post = {};
     post.text = event.target.textBody.value;
     post.post = id;
     post.created = Date.now();
+    //checks if comment is entered and user is valid
     if (post.text === "") {
       setErr("Please enter a comment");
     }
     if (localStorage.getItem("user") === null) {
       setErr("Must be logged in");
     }
+    //posts to bottom of page if successful. If not, displays error
     if (!(localStorage.getItem("user") === null)) {
       if (post.text) {
         post.username = localStorage.getItem("user");
@@ -91,6 +95,7 @@ const Forum = (props) => {
   };
 
   const Comments = () => {
+    //maps comments and displays user and time they are posted
     if (!(getComments.comments === undefined)) {
       var map = getComments.comments;
       return map.map((data) => (

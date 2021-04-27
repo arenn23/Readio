@@ -23,6 +23,7 @@ const Login = () => {
   const history = useHistory();
 
   const submit = async (e) => {
+    //Submits username and password to database in a try block. If successful, sets token and user into userContext and localStorage
     e.preventDefault();
     try {
       const loginRes = await Axios.post("/users/login", {
@@ -37,6 +38,7 @@ const Login = () => {
       localStorage.setItem("user", loginRes.data.user.userName);
       history.push("/");
     } catch (err) {
+      //If there is an err, it is caught and displayed for user.
       err.response.data.msg && setError(err.response.data.msg);
     }
   };
@@ -44,7 +46,9 @@ const Login = () => {
   return (
     <>
       <Header />
+      {/* Form that has a username and password. On submit, it send data to server to see if data matches a user in database.  */}
       <Container>
+        {/* Will display error if submit has an error response */}
         <div className="mt-4" style={{ color: "red" }}>
           {error}
         </div>

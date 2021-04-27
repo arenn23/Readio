@@ -4,6 +4,7 @@ const Comment = require("../models/commentModel");
 const auth = require("../middleware/auth");
 const e = require("express");
 
+//get indiviudal forum
 router.get("/:id", async (req, res) => {
   let response = {};
   try {
@@ -17,6 +18,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+//get all forums
 router.get("/", async (req, res) => {
   let response = {};
   try {
@@ -30,6 +32,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+//post new forum
 router.post("/new", auth, async (req, res) => {
   let response = {};
   try {
@@ -52,6 +55,7 @@ router.post("/new", auth, async (req, res) => {
   }
 });
 
+//post new comment in forum
 router.post("/:id/comments", auth, async (req, res) => {
   let response = {};
   console.log(req.body);
@@ -80,6 +84,7 @@ router.post("/:id/comments", auth, async (req, res) => {
   }
 });
 
+//get forum comments
 router.get("/:id/comments", async (req, res) => {
   let response = {};
 

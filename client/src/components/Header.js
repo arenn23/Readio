@@ -5,6 +5,7 @@ import UserContext from "../context/userContext";
 
 const Header = () => {
   const { userData, setUserData } = useContext(UserContext);
+  //Sets user and JWT token to null when user logs out and clears local storage.
   const logout = () => {
     setUserData({
       token: undefined,
@@ -22,6 +23,8 @@ const Header = () => {
           </Link>
         </Col>
         <Col>
+          {/* Conditonal rendering. Looks to see if user is logged in. If not, shows button for user to register or login. If so, displays
+        "Hello, ${username}"  and logout button*/}
           {localStorage.getItem("user") === null ? (
             <div>
               <Link to="/login">
