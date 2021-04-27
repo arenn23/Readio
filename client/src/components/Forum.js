@@ -50,6 +50,7 @@ const Forum = (props) => {
   }, [count]);
 
   const submitPost = (event) => {
+    event.preventDefault();
     setCount(count + 1);
     let post = {};
     post.text = event.target.textBody.value;
@@ -59,10 +60,7 @@ const Forum = (props) => {
       setErr("Please enter a comment");
     }
     if (localStorage.getItem("user") === null) {
-      // setErr("Must be logged in");
-      setTimeout(() => {
-        setErr("Must be logged in");
-      }, 5000);
+      setErr("Must be logged in");
     }
     if (!(localStorage.getItem("user") === null)) {
       if (post.text) {
@@ -79,6 +77,9 @@ const Forum = (props) => {
           .then((res) => {
             if (res.success) {
               setErr("Posted Successfully - see bottom of page");
+              setTimeout(() => {
+                window.location.reload(false);
+              }, 5000);
             } else {
               setErr(
                 "You are not authorized to post. Please provide a legitimate login"
