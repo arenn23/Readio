@@ -50,7 +50,6 @@ const Forum = (props) => {
   }, [count]);
 
   const submitPost = (event) => {
-    event.preventDefault();
     setCount(count + 1);
     let post = {};
     post.text = event.target.textBody.value;
