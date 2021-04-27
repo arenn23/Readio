@@ -79,7 +79,7 @@ const Forum = (props) => {
               setErr("Posted Successfully - see bottom of page");
               setTimeout(() => {
                 window.location.reload(false);
-              }, 5000);
+              }, 2000);
             } else {
               setErr(
                 "You are not authorized to post. Please provide a legitimate login"
